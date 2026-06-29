@@ -1,6 +1,9 @@
 import pool from "../config/db.js";
 
 export async function findUserByEmail(email) {
+
+  console.log("Searching email: ", email)
+
   const query = `
     SELECT *
     FROM users
@@ -8,6 +11,8 @@ export async function findUserByEmail(email) {
   `;
 
   const result = await pool.query(query, [email]);
+
+  console.log(result.rows)
 
   return result.rows[0];
 }

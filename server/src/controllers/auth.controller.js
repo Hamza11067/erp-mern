@@ -18,6 +18,7 @@ export async function register(req, res) {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
 
     const data = await loginUser(email, password);
 
