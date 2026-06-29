@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import AppError from "../utils/AppError.js";
 import { createUser, findUserByEmail } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
-// import { findUserByEmail } from "../repositories/auth.repository.js";
 
 export async function registerUser(userData) {
   const { fullName, email, password } = userData;
