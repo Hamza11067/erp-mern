@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import errorHandler from "./middleware/error.middleware.js";
 
 const app = express();
 
@@ -13,5 +14,7 @@ app.get("/", (req, res) => {
         message: "Factory ERP API Running"
     });
 });
+
+app.use(errorHandler);
 
 export default app;

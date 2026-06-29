@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
-import { findUserByEmail, createUser } from "../models/user.model.js";
+import AppError from "../utils/AppError.js";
+import { createUser } from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+import { findUserByEmail } from "../repositories/auth.repository.js";
 
 export async function registerUser(userData) {
   const { fullName, email, password } = userData;
@@ -8,7 +11,7 @@ export async function registerUser(userData) {
   const existingUser = await findUserByEmail(email);
 
   if (existingUser) {
-    throw new Error("Email already exists.");
+    throw new AppError("Email already exists.", 409);
   }
 
   // Hash password
@@ -27,3 +30,39 @@ export async function registerUser(userData) {
     data: newUser,
   };
 }
+
+
+export const loginUser = async (email, password) => {
+  const user = await findUserByEmail(email);
+
+  if (!user) {
+    throw new Error("Invalid email or password");
+  }
+
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordCorrect) {
+    throw new Error("Invalid email or password");
+  }
+
+  const token = jwt.sign(
+    {
+      id: user.id,
+      role: user.role,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
+
+  return {
+    token,
+    user: {
+      id: user.id,
+      full_name: user.full_name,
+      email: user.email,
+      role: user.role,
+    },
+  };
+};
