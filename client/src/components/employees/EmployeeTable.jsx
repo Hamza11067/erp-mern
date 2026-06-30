@@ -37,7 +37,7 @@ export default function EmployeeTable() {
   }
 
   return (
-    <div className="rounded-xl border bg-white shadow-sm">
+    <div className="rounded-md border bg-white shadow-sm">
       <Table>
         <TableHeader>
           <TableRow>

@@ -14,11 +14,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 const menu = [
   {
@@ -67,8 +65,8 @@ export default function Sidebar() {
     // <aside className="w-60 min-h-screen bg-white border-r border-slate-200">
     <aside className="flex w-60 min-h-screen flex-col bg-white border-r border-slate-200">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 py-[11px] border-b">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 text-white font-bold shadow-md">
+      <div className="flex items-center gap-3 px-5 py-2.75 border-b">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-blue-600 via-indigo-600 to-violet-600 text-white font-bold shadow-md">
           E
         </div>
 
