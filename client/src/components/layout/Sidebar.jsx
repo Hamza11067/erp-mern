@@ -5,10 +5,10 @@ const menu = [
   {
     title: "Dashboard",
     icon: LayoutDashboard,
-    active: true,
     iconBg: "bg-blue-100",
     iconColor: "text-blue-600",
     hover: "hover:bg-blue-50",
+    route: "/",
   },
   {
     title: "Employees",
@@ -16,6 +16,7 @@ const menu = [
     iconBg: "bg-emerald-100",
     iconColor: "text-emerald-600",
     hover: "hover:bg-emerald-50",
+    route: "/employees",
   },
   {
     title: "Departments",
@@ -23,6 +24,7 @@ const menu = [
     iconBg: "bg-violet-100",
     iconColor: "text-violet-600",
     hover: "hover:bg-violet-50",
+    route: "/departments",
   },
   {
     title: "Attendance",
@@ -30,6 +32,7 @@ const menu = [
     iconBg: "bg-orange-100",
     iconColor: "text-orange-600",
     hover: "hover:bg-orange-50",
+    route: "/attendance",
   },
 ];
 
@@ -56,53 +59,58 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <NavLink
               key={item.title}
-              className={`
-                group
-                flex
-                items-center
-                gap-3
-                w-full
-                rounded-xl
-                px-3
-                py-2.5
-                text-sm
-                font-medium
-                transition-all
-                duration-200
+              to={item.route}
+              className={({ isActive }) => `
+    group
+    flex
+    items-center
+    gap-3
+    w-full
+    rounded-xl
+    px-3
+    py-2.5
+    text-sm
+    font-medium
+    transition-all
+    duration-200
 
-                ${
-                  item.active
-                    ? "bg-blue-600 text-white shadow-md"
-                    : `text-slate-700 ${item.hover}`
-                }
-              `}
+    ${
+      isActive
+        ? "bg-blue-600 text-white shadow-md"
+        : `text-slate-700 ${item.hover}`
+    }
+  `}
             >
-              <div
-                className={`
-                  flex
-                  h-8
-                  w-8
-                  items-center
-                  justify-center
-                  rounded-lg
-                  transition-transform
-                  duration-200
-                  group-hover:scale-110
+              {({ isActive }) => (
+                <>
+                  <div
+                    className={`
+          flex
+          h-8
+          w-8
+          items-center
+          justify-center
+          rounded-lg
+          transition-transform
+          duration-200
+          group-hover:scale-110
 
-                  ${
-                    item.active
-                      ? "bg-white/20 text-white"
-                      : `${item.iconBg} ${item.iconColor}`
-                  }
-                `}
-              >
-                <Icon size={18} strokeWidth={2.2} />
-              </div>
+          ${
+            isActive
+              ? "bg-white/20 text-white"
+              : `${item.iconBg} ${item.iconColor}`
+          }
+        `}
+                  >
+                    <Icon size={18} strokeWidth={2.2} />
+                  </div>
 
-              {item.title}
-            </button>
+                  {item.title}
+                </>
+              )}
+            </NavLink>
           );
         })}
       </nav>

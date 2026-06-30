@@ -1,7 +1,9 @@
 export default function Employees() {
+  console.log("Employees Page Rendered");
+
   return (
-    <h1 className="text-3xl font-bold">
-      Employees
-    </h1>
+    <div className="p-6 bg-red-200">
+      Employees Page
+    </div>
   );
 }

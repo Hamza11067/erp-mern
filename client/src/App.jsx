@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
-import DashboardLayout from "./layouts/DashboardLayout";
-
+import DashboardLayout from "./components/layout/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Employees from "./pages/Employees";
 import Departments from "./pages/Departments";
