@@ -1,5 +1,24 @@
-import { LayoutDashboard, Users, Building2, CalendarCheck } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Users,
+  Building2,
+  CalendarCheck,
+  LogOut,
+} from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const menu = [
   {
@@ -37,10 +56,18 @@ const menu = [
 ];
 
 export default function Sidebar() {
+  const [logoutOpen, setLogoutOpen] = useState(false);
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/login", { replace: true });
+  }
   return (
-    <aside className="w-60 min-h-screen bg-white border-r border-slate-200">
+    // <aside className="w-60 min-h-screen bg-white border-r border-slate-200">
+    <aside className="flex w-60 min-h-screen flex-col bg-white border-r border-slate-200">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-5 py-4 border-b">
+      <div className="flex items-center gap-3 px-5 py-[11px] border-b">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 text-white font-bold shadow-md">
           E
         </div>
@@ -114,6 +141,49 @@ export default function Sidebar() {
           );
         })}
       </nav>
+
+      {/* Logout */}
+
+      <div className="mt-auto p-3">
+        <div className="w-full">
+          <button
+            onClick={() => setLogoutOpen(true)}
+            className="group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 transition-all"
+          >
+            <div
+              className="
+              flex h-8 w-8 items-center justify-center
+              rounded-lg bg-red-100
+              transition-transform duration-200
+              group-hover:scale-110
+            "
+            >
+              <LogOut size={18} />
+            </div>
+            Logout
+          </button>
+          <AlertDialog open={logoutOpen} onOpenChange={setLogoutOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Logout?</AlertDialogTitle>
+
+                <AlertDialogDescription>
+                  Are you sure you want to logout? You will need to login again
+                  to access your account.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+
+                <AlertDialogAction onClick={handleLogout}>
+                  Logout
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
+      </div>
     </aside>
   );
 }
