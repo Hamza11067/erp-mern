@@ -8,7 +8,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
-export default function EmployeeTable({ employees, loading, onEdit }) {
+export default function EmployeeTable({
+  employees,
+  loading,
+  onEdit,
+  onDelete,
+}) {
   if (loading) {
     return <div className="rounded-xl bg-white p-6">Loading employees...</div>;
   }
@@ -55,7 +60,11 @@ export default function EmployeeTable({ employees, loading, onEdit }) {
                     Edit
                   </Button>
 
-                  <Button variant="destructive" size="sm">
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => onDelete(employee)}
+                  >
                     Delete
                   </Button>
                 </TableCell>

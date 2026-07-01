@@ -35,6 +35,7 @@ export default function EmployeeForm({ onSuccess, employee }) {
   });
 
   useEffect(() => {
+    console.log(employee);
     if (employee) {
       reset({
         fullName: employee.full_name,

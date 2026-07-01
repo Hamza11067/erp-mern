@@ -29,18 +29,19 @@ export async function createEmployee(data) {
 
 export async function getAllEmployees() {
   const query = `
-    SELECT 
-      e.id,
-      e.full_name,
-      e.email,
-      e.phone,
-      e.designation,
-      e.salary,
-      d.name AS department
-    FROM employees e
-    LEFT JOIN departments d
-      ON e.department_id = d.id
-    ORDER BY e.id DESC;
+   SELECT
+  e.id,
+  e.full_name,
+  e.email,
+  e.phone,
+  e.department_id,
+  e.designation,
+  e.salary,
+  d.name AS department
+FROM employees e
+LEFT JOIN departments d
+ON e.department_id = d.id
+ORDER BY e.id DESC;
   `;
 
   const result = await pool.query(query);
@@ -48,10 +49,9 @@ export async function getAllEmployees() {
 }
 
 export async function getEmployeeById(id) {
-  const result = await pool.query(
-    "SELECT * FROM employees WHERE id = $1",
-    [id]
-  );
+  const result = await pool.query("SELECT * FROM employees WHERE id = $1", [
+    id,
+  ]);
   return result.rows[0];
 }
 
@@ -87,7 +87,7 @@ export async function updateEmployee(id, data) {
 export async function deleteEmployee(id) {
   const result = await pool.query(
     "DELETE FROM employees WHERE id=$1 RETURNING *",
-    [id]
+    [id],
   );
 
   return result.rows[0];

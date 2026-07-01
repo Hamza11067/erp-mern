@@ -42,10 +42,19 @@ export const addEmployee = async (req, res) => {
 
 export const listEmployees = async (req, res) => {
   try {
-    const employees = await getAllEmployees();
-    res.json({ success: true, employees });
+    const { search = "" } = req.query;
+
+    const employees = await getAllEmployees(search);
+
+    res.json({
+      success: true,
+      employees,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -60,10 +69,35 @@ export const getEmployee = async (req, res) => {
 
 export const editEmployee = async (req, res) => {
   try {
-    const employee = await updateEmployee(req.params.id, req.body);
-    res.json({ success: true, employee });
+    const {
+      fullName,
+      email,
+      phone,
+      departmentId,
+      designation,
+      salary,
+    } = req.body;
+
+    const employee = await updateEmployee(req.params.id, {
+      full_name: fullName,
+      email,
+      phone,
+      department_id: departmentId,
+      designation,
+      salary,
+    });
+
+    res.json({
+      success: true,
+      employee,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
