@@ -22,9 +22,9 @@ export default function EmployeeTable({
   }
 
   return (
-    <div className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
+    <div className="h-full overflow-auto rounded-md border border-slate-200 bg-white shadow-sm">
       <Table>
-        <TableHeader className="bg-slate-50">
+        <TableHeader className="sticky top-0 z-10 bg-slate-50">
           <TableRow className="transition-colors hover:bg-slate-50">
             <TableHead className="font-semibold uppercase tracking-wide text-slate-600 text-center">
               ID
