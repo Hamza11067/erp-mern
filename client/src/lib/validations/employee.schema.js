@@ -7,18 +7,18 @@ export const employeeSchema = z.object({
     .min(3, "Full name must be at least 3 characters"),
 
   email: z
-    .email("Invalid email address")
-    .trim(),
+    .string()
+    .trim()
+    .email("Invalid email address"),
 
   phone: z
     .string()
     .trim()
-    .min(11, "Phone number is required"),
+    .min(11, "Phone number must be at least 11 digits"),
 
-  department: z
-    .string()
-    .trim()
-    .min(2, "Department is required"),
+  departmentId: z.coerce
+    .number()
+    .positive("Department is required"),
 
   designation: z
     .string()

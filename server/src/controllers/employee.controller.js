@@ -8,10 +8,35 @@ import {
 
 export const addEmployee = async (req, res) => {
   try {
-    const employee = await createEmployee(req.body);
-    res.status(201).json({ success: true, employee });
+    const {
+      fullName,
+      email,
+      phone,
+      departmentId,
+      designation,
+      salary,
+    } = req.body;
+
+    const employee = await createEmployee({
+      full_name: fullName,
+      email,
+      phone,
+      department_id: departmentId,
+      designation,
+      salary,
+    });
+
+    res.status(201).json({
+      success: true,
+      employee,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 

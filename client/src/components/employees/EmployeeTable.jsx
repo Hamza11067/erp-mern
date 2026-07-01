@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { getEmployees } from "@/services/employee.service";
-
 import {
   Table,
   TableBody,
@@ -9,29 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 
-export default function EmployeeTable() {
-  const [employees, setEmployees] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadEmployees();
-  }, []);
-
-  async function loadEmployees() {
-    try {
-      const data = await getEmployees();
-
-      if (data.success) {
-        setEmployees(data.employees);
-      }
-    } catch (error) {
-      console.error("Failed to load employees:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
+export default function EmployeeTable({ employees, loading, onEdit }) {
   if (loading) {
     return <div className="rounded-xl bg-white p-6">Loading employees...</div>;
   }
@@ -65,14 +42,22 @@ export default function EmployeeTable() {
                   {employee.full_name}
                 </TableCell>
                 <TableCell>{employee.email}</TableCell>
-                <TableCell>
-                  {employee.department ?? "-"}
-                </TableCell>
+                <TableCell>{employee.department ?? "-"}</TableCell>
                 <TableCell className="text-right">
                   Rs. {Number(employee.salary).toLocaleString()}
                 </TableCell>
-                <TableCell className="text-center">
-                  Edit | Delete
+                <TableCell className="text-center space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => onEdit(employee)}
+                  >
+                    Edit
+                  </Button>
+
+                  <Button variant="destructive" size="sm">
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))
