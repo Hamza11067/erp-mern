@@ -27,31 +27,51 @@ export async function createEmployee(data) {
   return result.rows[0];
 }
 
-export async function getAllEmployees() {
+export async function getAllEmployees(search = "") {
   const query = `
-   SELECT
-  e.id,
-  e.full_name,
-  e.email,
-  e.phone,
-  e.department_id,
-  e.designation,
-  e.salary,
-  d.name AS department
-FROM employees e
-LEFT JOIN departments d
-ON e.department_id = d.id
-ORDER BY e.id DESC;
+    SELECT
+      e.id,
+      e.full_name,
+      e.email,
+      e.phone,
+      e.department_id,
+      e.designation,
+      e.salary,
+      d.name AS department
+    FROM employees e
+    LEFT JOIN departments d
+      ON e.department_id = d.id
+    WHERE
+      e.full_name ILIKE $1
+    ORDER BY e.id DESC;
   `;
 
-  const result = await pool.query(query);
+  const values = [`%${search}%`];
+
+  const result = await pool.query(query, values);
   return result.rows;
 }
 
 export async function getEmployeeById(id) {
-  const result = await pool.query("SELECT * FROM employees WHERE id = $1", [
-    id,
-  ]);
+  const result = await pool.query(
+    `
+    SELECT
+      e.id,
+      e.full_name,
+      e.email,
+      e.phone,
+      e.department_id,
+      e.designation,
+      e.salary,
+      d.name AS department
+    FROM employees e
+    LEFT JOIN departments d
+      ON e.department_id = d.id
+    WHERE e.id = $1;
+    `,
+    [id]
+  );
+
   return result.rows[0];
 }
 
