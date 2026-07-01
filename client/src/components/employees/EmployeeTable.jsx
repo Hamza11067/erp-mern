@@ -7,6 +7,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function EmployeeTable({
   employees,
@@ -19,54 +22,100 @@ export default function EmployeeTable({
   }
 
   return (
-    <div className="rounded-md border bg-white shadow-sm">
+    <div className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
       <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Full Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Department</TableHead>
-            <TableHead className="text-right">Salary</TableHead>
-            <TableHead className="text-center">Actions</TableHead>
+        <TableHeader className="bg-slate-50">
+          <TableRow className="transition-colors hover:bg-slate-50">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 text-center">
+              ID
+            </TableHead>
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+              Full Name
+            </TableHead>
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+              Email
+            </TableHead>
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+              Phone
+            </TableHead>
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+              Department
+            </TableHead>
+            <TableHead className="text-right font-semibold uppercase tracking-wide text-slate-600">
+              Salary
+            </TableHead>
+            <TableHead className="text-center font-semibold uppercase tracking-wide text-slate-600">
+              Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
           {employees.length === 0 ? (
-            <TableRow>
+            <TableRow className="transition-colors hover:bg-slate-50">
               <TableCell colSpan={6} className="text-center py-8">
                 No employees found.
               </TableCell>
             </TableRow>
           ) : (
             employees.map((employee) => (
-              <TableRow key={employee.id}>
-                <TableCell>{employee.id}</TableCell>
-                <TableCell className="font-medium">
-                  {employee.full_name}
+              <TableRow
+                key={employee.id}
+                className="transition-colors hover:bg-slate-50"
+              >
+                <TableCell className="pl-4">{employee.id}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10">
+                      <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold">
+                        {employee.full_name
+                          ?.split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .slice(0, 2)}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div>
+                      <p className="font-semibold text-slate-800">
+                        {employee.full_name}
+                      </p>
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell>{employee.email}</TableCell>
-                <TableCell>{employee.department ?? "-"}</TableCell>
+                <TableCell className="text-slate-600">
+                  {employee.phone || "-"}
+                </TableCell>
+                <TableCell>
+                  <Badge variant="secondary" className="rounded-full px-3 py-1">
+                    {employee.department ?? "N/A"}
+                  </Badge>
+                </TableCell>
                 <TableCell className="text-right">
-                  Rs. {Number(employee.salary).toLocaleString()}
+                  <span className="font-semibold text-emerald-600">
+                    PKR {Number(employee.salary).toLocaleString()}
+                  </span>
                 </TableCell>
                 <TableCell className="text-center space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => onEdit(employee)}
-                  >
-                    Edit
-                  </Button>
+                  <div className="flex justify-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => onEdit(employee)}
+                    >
+                      <Pencil className="h-4 w-4" />
+                    </Button>
 
-                  <Button
-                    variant="destructive"
-                    size="sm"
-                    onClick={() => onDelete(employee)}
-                  >
-                    Delete
-                  </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="text-red-500 hover:bg-red-50"
+                      onClick={() => onDelete(employee)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))

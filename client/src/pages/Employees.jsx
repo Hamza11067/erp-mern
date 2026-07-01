@@ -67,11 +67,9 @@ export default function Employees() {
 
   return (
     <div className="space-y-6">
-      {/* <div className="flex items-center justify-between"> */}
       <h1 className="text-3xl font-bold">Employees</h1>
 
       <div className="flex items-center justify-between gap-4">
-        {/* <Input className="" /> */}
 
         <div className="relative hidden md:block w-full">
           <Search
