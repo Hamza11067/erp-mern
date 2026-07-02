@@ -66,11 +66,10 @@ export default function Employees() {
   }
 
   return (
-    <div className="flex h-full min-h-0 flex-col space-y-6">
+    <div className="flex h-[calc(100vh-120px)] min-h-0 flex-col space-y-6">
       <h1 className="text-3xl font-bold">Employees</h1>
 
       <div className="flex items-center justify-between gap-4">
-
         <div className="relative hidden md:block w-full">
           <Search
             size={18}
@@ -106,12 +105,14 @@ export default function Employees() {
         onConfirm={handleDelete}
       />
 
-      <EmployeeTable
-        employees={employees}
-        loading={loading}
-        onEdit={handleEdit}
-        onDelete={handleDeleteClick}
-      />
+      <div className="flex-1 min-h-0">
+        <EmployeeTable
+          employees={employees}
+          loading={loading}
+          onEdit={handleEdit}
+          onDelete={handleDeleteClick}
+        />
+      </div>
     </div>
   );
 }

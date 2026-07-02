@@ -46,8 +46,8 @@ export default function CustomerForm({ onSuccess, customer }) {
         address: customer.address,
         city: customer.city,
         cnic: customer.cnic,
-        openingBalance: customer.opening_balance,
-        creditLimit: customer.credit_limit,
+        openingBalance: customer.openingBalance,
+        creditLimit: customer.creditLimit,
         status: customer.status,
       });
     } else {
@@ -90,11 +90,7 @@ export default function CustomerForm({ onSuccess, customer }) {
       {/* Name */}
       <div>
         <Label htmlFor="name">Customer Name</Label>
-        <Input
-          id="name"
-          placeholder="Ahmed Traders"
-          {...register("name")}
-        />
+        <Input id="name" placeholder="Ahmed Traders" {...register("name")} />
         {errors.name && (
           <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
         )}
@@ -103,11 +99,7 @@ export default function CustomerForm({ onSuccess, customer }) {
       {/* Phone */}
       <div>
         <Label htmlFor="phone">Phone</Label>
-        <Input
-          id="phone"
-          placeholder="03XXXXXXXXX"
-          {...register("phone")}
-        />
+        <Input id="phone" placeholder="03XXXXXXXXX" {...register("phone")} />
         {errors.phone && (
           <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
         )}
@@ -130,11 +122,7 @@ export default function CustomerForm({ onSuccess, customer }) {
       {/* City */}
       <div>
         <Label htmlFor="city">City</Label>
-        <Input
-          id="city"
-          placeholder="Lahore"
-          {...register("city")}
-        />
+        <Input id="city" placeholder="Lahore" {...register("city")} />
         {errors.city && (
           <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>
         )}
@@ -143,26 +131,16 @@ export default function CustomerForm({ onSuccess, customer }) {
       {/* Address */}
       <div className="md:col-span-2">
         <Label htmlFor="address">Address</Label>
-        <Input
-          id="address"
-          placeholder="Main Bazar"
-          {...register("address")}
-        />
+        <Input id="address" placeholder="Main Bazar" {...register("address")} />
         {errors.address && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.address.message}
-          </p>
+          <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
         )}
       </div>
 
       {/* CNIC */}
       <div>
         <Label htmlFor="cnic">CNIC</Label>
-        <Input
-          id="cnic"
-          placeholder="35202-1234567-1"
-          {...register("cnic")}
-        />
+        <Input id="cnic" placeholder="35202-1234567-1" {...register("cnic")} />
         {errors.cnic && (
           <p className="text-red-500 text-sm mt-1">{errors.cnic.message}</p>
         )}
@@ -174,7 +152,7 @@ export default function CustomerForm({ onSuccess, customer }) {
         <Input
           id="openingBalance"
           type="number"
-          {...register("openingBalance")}
+          {...register("openingBalance", { valueAsNumber: true })}
         />
         {errors.openingBalance && (
           <p className="text-red-500 text-sm mt-1">
@@ -186,11 +164,7 @@ export default function CustomerForm({ onSuccess, customer }) {
       {/* Credit Limit */}
       <div>
         <Label htmlFor="creditLimit">Credit Limit</Label>
-        <Input
-          id="creditLimit"
-          type="number"
-          {...register("creditLimit")}
-        />
+        <Input id="creditLimit" type="number" {...register("creditLimit")} />
         {errors.creditLimit && (
           <p className="text-red-500 text-sm mt-1">
             {errors.creditLimit.message}

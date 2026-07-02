@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Users,
+  UserRound,
   Building2,
   CalendarCheck,
   LogOut,
@@ -34,6 +35,14 @@ const menu = [
     iconColor: "text-emerald-600",
     hover: "hover:bg-emerald-50",
     route: "/employees",
+  },
+  {
+    title: "Customers",
+    icon: UserRound,
+    iconBg: "bg-cyan-100",
+    iconColor: "text-cyan-600",
+    hover: "hover:bg-cyan-50",
+    route: "/customers",
   },
   {
     title: "Departments",
