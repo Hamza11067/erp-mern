@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Pencil, Trash2 } from "lucide-react";
 
 export default function EmployeeTable({
@@ -22,29 +21,29 @@ export default function EmployeeTable({
   }
 
   return (
-    <div className="h-full overflow-auto rounded-md border border-slate-200 bg-white shadow-sm">
+    <div className="max-h-150 overflow-auto rounded-md border border-slate-200 bg-white shadow-sm">
       <Table>
-        <TableHeader className="sticky top-0 z-10 bg-slate-50">
+        <TableHeader className="bg-slate-100">
           <TableRow className="transition-colors hover:bg-slate-50">
-            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 text-center">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 text-center border border-slate-300 bg-slate-100">
               ID
             </TableHead>
-            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Full Name
             </TableHead>
-            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Email
             </TableHead>
-            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Phone
             </TableHead>
-            <TableHead className="font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Department
             </TableHead>
-            <TableHead className="text-right font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="text-right font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Salary
             </TableHead>
-            <TableHead className="text-center font-semibold uppercase tracking-wide text-slate-600">
+            <TableHead className="text-center font-semibold uppercase tracking-wide text-slate-600 border border-slate-300 bg-slate-100">
               Actions
             </TableHead>
           </TableRow>
@@ -63,41 +62,29 @@ export default function EmployeeTable({
                 key={employee.id}
                 className="transition-colors hover:bg-slate-50"
               >
-                <TableCell className="pl-4">{employee.id}</TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold">
-                        {employee.full_name
-                          ?.split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </AvatarFallback>
-                    </Avatar>
-
-                    <div>
-                      <p className="font-semibold text-slate-800">
-                        {employee.full_name}
-                      </p>
-                    </div>
-                  </div>
+                <TableCell className="pl-4 border border-slate-200">
+                  {employee.id}
                 </TableCell>
-                <TableCell>{employee.email}</TableCell>
-                <TableCell className="text-slate-600">
+                <TableCell className="font-medium text-slate-800 border border-slate-200">
+                  {employee.full_name}
+                </TableCell>
+                <TableCell className="border border-slate-200">
+                  {employee.email}
+                </TableCell>
+                <TableCell className="text-slate-600 border border-slate-200">
                   {employee.phone || "-"}
                 </TableCell>
-                <TableCell>
+                <TableCell className="border border-slate-200">
                   <Badge variant="secondary" className="rounded-full px-3 py-1">
                     {employee.department ?? "N/A"}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right">
+                <TableCell className="text-right border border-slate-200">
                   <span className="font-semibold text-emerald-600">
                     PKR {Number(employee.salary).toLocaleString()}
                   </span>
                 </TableCell>
-                <TableCell className="text-center space-x-2">
+                <TableCell className="text-center space-x-2 border border-slate-200">
                   <div className="flex justify-center gap-2">
                     <Button
                       variant="outline"

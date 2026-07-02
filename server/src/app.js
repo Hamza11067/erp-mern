@@ -6,6 +6,7 @@ import employeeRoutes from "./routes/employee.routes.js";
 import departmentRoutes from "./routes/department.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
+import customerRoutes from "./routes/customer.routes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use("/api/employees", employeeRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/customers", customerRoutes);
 
 app.get("/", (req, res) => {
   res.json({
