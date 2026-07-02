@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "next-themes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,8 +20,10 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <App />
-      <Toaster richColors position="top-right" />
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <App />
+        <Toaster richColors position="top-right" />
+      </ThemeProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,
