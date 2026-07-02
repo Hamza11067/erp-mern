@@ -21,9 +21,9 @@ export default function EmployeeTable({
   }
 
   return (
-    <div className="max-h-150 overflow-auto rounded-md border border-slate-200 bg-white shadow-sm">
-      <Table>
-        <TableHeader className="bg-slate-100">
+    <div className="relative max-h-150 overflow-auto rounded-md border border-slate-200 bg-white shadow-sm">
+      <Table className="w-full border-collapse">
+        <TableHeader className="sticky top-0 z-10 bg-slate-100">
           <TableRow className="transition-colors hover:bg-slate-50">
             <TableHead className="font-semibold uppercase tracking-wide text-slate-600 text-center border border-slate-300 bg-slate-100">
               ID
@@ -52,7 +52,7 @@ export default function EmployeeTable({
         <TableBody>
           {employees.length === 0 ? (
             <TableRow className="transition-colors hover:bg-slate-50">
-              <TableCell colSpan={6} className="text-center py-8">
+              <TableCell colSpan={7} className="text-center py-8"> {/* Fixed colSpan to 7 to match total headers */}
                 No employees found.
               </TableCell>
             </TableRow>
@@ -66,10 +66,10 @@ export default function EmployeeTable({
                   {employee.id}
                 </TableCell>
                 <TableCell className="font-medium text-slate-800 border border-slate-200">
-                  {employee.full_name}
+                  {employee.fullName}
                 </TableCell>
                 <TableCell className="border border-slate-200">
-                  {employee.email}
+                  {employee.email.toLowerCase() || "-"}
                 </TableCell>
                 <TableCell className="text-slate-600 border border-slate-200">
                   {employee.phone || "-"}

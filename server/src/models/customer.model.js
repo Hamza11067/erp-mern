@@ -1,10 +1,10 @@
- import pool from "../config/db.js";
+import pool from "../config/db.js";
 
 export const getCustomers = async () => {
   const result = await pool.query(`
     SELECT *
     FROM customers
-    ORDER BY created_at DESC
+    ORDER BY "createdAt" DESC
   `);
 
   return result.rows;
@@ -16,7 +16,7 @@ export const getCustomerById = async (id) => {
     SELECT *
     FROM customers
     WHERE id = $1
-  `,
+    `,
     [id]
   );
 
@@ -31,28 +31,27 @@ export const createCustomer = async (customer) => {
     address,
     city,
     cnic,
-    opening_balance,
-    credit_limit,
+    openingBalance,
+    creditLimit,
     status,
   } = customer;
 
   const result = await pool.query(
     `
-    INSERT INTO customers
-    (
+    INSERT INTO customers (
       name,
       phone,
       email,
       address,
       city,
       cnic,
-      opening_balance,
-      credit_limit,
+      "openingBalance",
+      "creditLimit",
       status
     )
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING *
-  `,
+    `,
     [
       name,
       phone,
@@ -60,8 +59,8 @@ export const createCustomer = async (customer) => {
       address,
       city,
       cnic,
-      opening_balance,
-      credit_limit,
+      openingBalance,
+      creditLimit,
       status,
     ]
   );
@@ -77,8 +76,8 @@ export const updateCustomer = async (id, customer) => {
     address,
     city,
     cnic,
-    opening_balance,
-    credit_limit,
+    openingBalance,
+    creditLimit,
     status,
   } = customer;
 
@@ -92,13 +91,13 @@ export const updateCustomer = async (id, customer) => {
       address = $4,
       city = $5,
       cnic = $6,
-      opening_balance = $7,
-      credit_limit = $8,
+      "openingBalance" = $7,
+      "creditLimit" = $8,
       status = $9,
-      updated_at = CURRENT_TIMESTAMP
+      "updatedAt" = CURRENT_TIMESTAMP
     WHERE id = $10
     RETURNING *
-  `,
+    `,
     [
       name,
       phone,
@@ -106,8 +105,8 @@ export const updateCustomer = async (id, customer) => {
       address,
       city,
       cnic,
-      opening_balance,
-      credit_limit,
+      openingBalance,
+      creditLimit,
       status,
       id,
     ]
@@ -122,7 +121,7 @@ export const deleteCustomer = async (id) => {
     DELETE FROM customers
     WHERE id = $1
     RETURNING *
-  `,
+    `,
     [id]
   );
 

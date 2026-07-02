@@ -38,10 +38,10 @@ export default function EmployeeForm({ onSuccess, employee }) {
     console.log(employee);
     if (employee) {
       reset({
-        fullName: employee.full_name,
+        fullName: employee.fullName,
         email: employee.email,
         phone: employee.phone,
-        departmentId: String(employee.department_id),
+        departmentId: String(employee.departmentId),
         designation: employee.designation,
         salary: String(employee.salary),
       });
@@ -137,9 +137,9 @@ export default function EmployeeForm({ onSuccess, employee }) {
           )}
         />
 
-        {errors.department && (
+        {errors.departmentId && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.department.message}
+            {errors.departmentId.message}
           </p>
         )}
       </div>

@@ -18,10 +18,10 @@ export const addEmployee = async (req, res) => {
     } = req.body;
 
     const employee = await createEmployee({
-      full_name: fullName,
+      fullName,
       email,
       phone,
-      department_id: departmentId,
+      departmentId,
       designation,
       salary,
     });
@@ -51,6 +51,8 @@ export const listEmployees = async (req, res) => {
       employees,
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: error.message,
@@ -61,9 +63,18 @@ export const listEmployees = async (req, res) => {
 export const getEmployee = async (req, res) => {
   try {
     const employee = await getEmployeeById(req.params.id);
-    res.json({ success: true, employee });
+
+    res.json({
+      success: true,
+      employee,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
 
@@ -79,10 +90,10 @@ export const editEmployee = async (req, res) => {
     } = req.body;
 
     const employee = await updateEmployee(req.params.id, {
-      full_name: fullName,
+      fullName,
       email,
       phone,
-      department_id: departmentId,
+      departmentId,
       designation,
       salary,
     });
@@ -104,8 +115,17 @@ export const editEmployee = async (req, res) => {
 export const removeEmployee = async (req, res) => {
   try {
     const employee = await deleteEmployee(req.params.id);
-    res.json({ success: true, employee });
+
+    res.json({
+      success: true,
+      employee,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };

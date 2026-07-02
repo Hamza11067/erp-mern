@@ -3,10 +3,10 @@ import pool from "../config/db.js";
 export async function createEmployee(data) {
   const query = `
     INSERT INTO employees (
-      full_name,
+      "fullName",
       email,
       phone,
-      department_id,
+      "departmentId",
       designation,
       salary
     )
@@ -15,10 +15,10 @@ export async function createEmployee(data) {
   `;
 
   const values = [
-    data.full_name,
+    data.fullName,
     data.email,
     data.phone,
-    data.department_id,
+    data.departmentId,
     data.designation,
     data.salary,
   ];
@@ -31,18 +31,18 @@ export async function getAllEmployees(search = "") {
   const query = `
     SELECT
       e.id,
-      e.full_name,
+      e."fullName",
       e.email,
       e.phone,
-      e.department_id,
+      e."departmentId",
       e.designation,
       e.salary,
       d.name AS department
     FROM employees e
     LEFT JOIN departments d
-      ON e.department_id = d.id
+      ON e."departmentId" = d.id
     WHERE
-      e.full_name ILIKE $1
+      e."fullName" ILIKE $1
     ORDER BY e.id DESC;
   `;
 
@@ -57,16 +57,16 @@ export async function getEmployeeById(id) {
     `
     SELECT
       e.id,
-      e.full_name,
+      e."fullName",
       e.email,
       e.phone,
-      e.department_id,
+      e."departmentId",
       e.designation,
       e.salary,
       d.name AS department
     FROM employees e
     LEFT JOIN departments d
-      ON e.department_id = d.id
+      ON e."departmentId" = d.id
     WHERE e.id = $1;
     `,
     [id]
@@ -79,22 +79,22 @@ export async function updateEmployee(id, data) {
   const query = `
     UPDATE employees
     SET
-      full_name = $1,
+      "fullName" = $1,
       email = $2,
       phone = $3,
-      department_id = $4,
+      "departmentId" = $4,
       designation = $5,
       salary = $6,
-      updated_at = NOW()
+      "updatedAt" = NOW()
     WHERE id = $7
     RETURNING *;
   `;
 
   const values = [
-    data.full_name,
+    data.fullName,
     data.email,
     data.phone,
-    data.department_id,
+    data.departmentId,
     data.designation,
     data.salary,
     id,
@@ -106,8 +106,8 @@ export async function updateEmployee(id, data) {
 
 export async function deleteEmployee(id) {
   const result = await pool.query(
-    "DELETE FROM employees WHERE id=$1 RETURNING *",
-    [id],
+    "DELETE FROM employees WHERE id = $1 RETURNING *;",
+    [id]
   );
 
   return result.rows[0];
