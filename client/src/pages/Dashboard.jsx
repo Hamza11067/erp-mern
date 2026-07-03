@@ -5,25 +5,37 @@ import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import DepartmentOverview from "@/components/dashboard/DepartmentOverview";
 import QuickActions from "@/components/dashboard/QuickActions";
 
-import { Users, Building2, CalendarCheck, BadgeDollarSign } from "lucide-react";
+import {
+  Users,
+  Building2,
+  CalendarCheck,
+  BadgeDollarSign,
+} from "lucide-react";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-4">
+    <div className="page space-y-4">
       {/* Welcome */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Welcome back, Hamza 👋
           </h1>
 
-          <p className="text-muted-foreground mt-1">
+          <p className="mt-1 text-muted-foreground">
             Here's what's happening in your company today.
           </p>
         </div>
 
-        <div className="rounded-xl bg-blue-50 px-4 py-2">
-          <p className="text-sm text-blue-700 font-medium">Tuesday, 30 June</p>
+        <div className="rounded-xl bg-blue-100 px-4 py-2 dark:bg-blue-500/15">
+          <p className="text-sm font-medium text-blue-700 dark:text-blue-400">
+            {new Date().toLocaleDateString("en-US", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
         </div>
       </div>
 
@@ -34,8 +46,8 @@ export default function Dashboard() {
           value={120}
           subtitle="+5 this month"
           icon={Users}
-          iconBg="bg-blue-100"
-          iconColor="text-blue-600"
+          iconBg="bg-blue-100 dark:bg-blue-500/15"
+          iconColor="text-blue-600 dark:text-blue-400"
         />
 
         <StatsCard
@@ -43,8 +55,8 @@ export default function Dashboard() {
           value={8}
           subtitle="Active departments"
           icon={Building2}
-          iconBg="bg-violet-100"
-          iconColor="text-violet-600"
+          iconBg="bg-violet-100 dark:bg-violet-500/15"
+          iconColor="text-violet-600 dark:text-violet-400"
         />
 
         <StatsCard
@@ -52,8 +64,8 @@ export default function Dashboard() {
           value={105}
           subtitle="87% attendance"
           icon={CalendarCheck}
-          iconBg="bg-green-100"
-          iconColor="text-green-600"
+          iconBg="bg-green-100 dark:bg-green-500/15"
+          iconColor="text-green-600 dark:text-green-400"
         />
 
         <StatsCard
@@ -61,8 +73,8 @@ export default function Dashboard() {
           value="$42K"
           subtitle="This month"
           icon={BadgeDollarSign}
-          iconBg="bg-amber-100"
-          iconColor="text-amber-600"
+          iconBg="bg-amber-100 dark:bg-amber-500/15"
+          iconColor="text-amber-600 dark:text-amber-400"
         />
       </div>
 
